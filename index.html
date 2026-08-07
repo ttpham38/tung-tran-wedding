@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lễ Thành Hôn · Thanh Tùng & Quế Trân</title>
+
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload font CSS để trình duyệt tải sớm nhất có thể -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&family=Noto+Serif+Display:wght@300;400&display=block"
+        onload="this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&family=Noto+Serif+Display:wght@300;400&display=block" rel="stylesheet">
+    </noscript>
+
+    <!-- Ẩn body cho đến khi fonts sẵn sàng, tránh FOUT -->
+    <style>
+        body { opacity: 0; }
+        body.fonts-ready { opacity: 1; transition: opacity 0.3s ease; }
+    </style>
+    <script>
+        // Hiện nội dung sau khi fonts load xong, hoặc tối đa 1.5s
+        const fontTimeout = setTimeout(() => {
+            document.body.classList.add('fonts-ready');
+        }, 1500);
+
+        document.fonts.ready.then(() => {
+            clearTimeout(fontTimeout);
+            document.body.classList.add('fonts-ready');
+        });
+    </script>
+
+    <meta property="og:title" content="Lễ Thành Hôn · Thanh Tùng & Quế Trân"/>
+    <meta property="og:description" content="Kính mời quý vị tham dự Lễ Thành Hôn"/>
+    <meta property="og:type" content="website"/>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" as="audio" href="./public/files/music.mp3" type="audio/mpeg"/>
+</head>
+<body>
+
+<!-- ── Nhạc nền ── -->
+<audio id="bgAudio" loop>
+    <source src="./public/files/music.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" aria-label="Bật/tắt nhạc" title="Bật/tắt nhạc">
+    <span class="music-icon">
+        <span class="bar b1"></span>
+        <span class="bar b2"></span>
+        <span class="bar b3"></span>
+        <span class="bar b4"></span>
+    </span>
+</button>
+<div id="copy-toast">Đã sao chép!</div>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="hero">
+    <div class="hero__petals" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero__inner reveal-up">
+        <p class="hero__label">Save the Date</p>
+        <div class="hero__divider">
+            <span class="deco-line"></span>
+            <span class="deco-diamond">◆</span>
+            <span class="deco-line"></span>
+        </div>
+        <h1 class="hero__names">
+            <span>Thanh Tùng</span>
+            <em>&amp;</em>
+            <span>Quế Trân</span>
+        </h1>
+        <div class="hero__divider">
+            <span class="deco-line"></span>
+            <span class="deco-diamond">◆</span>
+            <span class="deco-line"></span>
+        </div>
+        <div class="hero__date-block">
+            <div class="hero__date-item">
+                <span class="hero__date-label">THỨ</span>
+                <span class="hero__date-val">CN</span>
+            </div>
+            <div class="hero__date-main">20</div>
+            <div class="hero__date-item">
+                <span class="hero__date-label">THÁNG</span>
+                <span class="hero__date-val">09</span>
+            </div>
+            <div class="hero__date-item">
+                <span class="hero__date-label">NĂM</span>
+                <span class="hero__date-val">2026</span>
+            </div>
+        </div>
+        <p class="hero__time">11 giờ 00 · Tổ 19, Khu phố Gia Tân, Phường Gia Lộc, Tỉnh Tây Ninh</p>
+    </div>
+    <div class="hero__scroll-hint" aria-hidden="true">
+        <span></span>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ĐẾM NGƯỢC
+════════════════════════════════════════ -->
+<section class="countdown" id="countdown">
+    <div class="section-label reveal-up">Thời gian còn lại</div>
+    <div class="countdown__grid reveal-up" id="countdownGrid">
+        <div class="countdown__item">
+            <span class="countdown__num" id="cd-days">00</span>
+            <span class="countdown__unit">Ngày</span>
+        </div>
+        <span class="countdown__sep">:</span>
+        <div class="countdown__item">
+            <span class="countdown__num" id="cd-hours">00</span>
+            <span class="countdown__unit">Giờ</span>
+        </div>
+        <span class="countdown__sep">:</span>
+        <div class="countdown__item">
+            <span class="countdown__num" id="cd-mins">00</span>
+            <span class="countdown__unit">Phút</span>
+        </div>
+        <span class="countdown__sep">:</span>
+        <div class="countdown__item">
+            <span class="countdown__num" id="cd-secs">00</span>
+            <span class="countdown__unit">Giây</span>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     GIỚI THIỆU CÔ DÂU & CHÚ RỂ
+════════════════════════════════════════ -->
+<section class="couple" id="couple">
+    <div class="section-label reveal-up">Chú Rể &amp; Cô Dâu</div>
+    <h2 class="section-title reveal-up">Hai tâm hồn, một hành trình</h2>
+    <div class="couple__grid">
+        <div class="couple__card reveal-left">
+            <div class="couple__img-wrap">
+                <img src="./public/images/chu-re.jpg" alt="Chú rể Thanh Tùng" loading="lazy">
+            </div>
+            <div class="couple__info">
+                <span class="couple__role">Chú Rể</span>
+                <h3 class="couple__name">Thanh Tùng</h3>
+                <p class="couple__desc">Trưởng Nam</p>
+            </div>
+        </div>
+        <div class="couple__heart reveal-up" aria-hidden="true">❤</div>
+        <div class="couple__card reveal-right">
+            <div class="couple__img-wrap">
+                <img src="./public/images/co-dau.jpg" alt="Cô dâu Quế Trân" loading="lazy">
+            </div>
+            <div class="couple__info">
+                <span class="couple__role">Cô Dâu</span>
+                <h3 class="couple__name">Quế Trân</h3>
+                <p class="couple__desc">Quý Nữ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     THƯ MỜI
+════════════════════════════════════════ -->
+<section class="invite" id="invite">
+    <div class="invite__inner reveal-up">
+        <p class="invite__label font-fancy">Thư mời</p>
+        <div class="invite__divider"><span></span><span class="deco-diamond-sm">✦</span><span></span></div>
+        <h2 class="invite__title">Trân trọng kính mời</h2>
+        <p class="invite__body">
+            Tình yêu là nguồn sáng soi rọi mọi khoảnh khắc.<br>
+            Và những khoảnh khắc ấy đã trở thành vĩnh cửu khi chúng tôi quyết định<br>
+            dành trọn quãng đời còn lại bên nhau.<br><br>
+            Chúng tôi, bằng cả tấm lòng, xin chân thành kính mời quý vị<br>
+            đến chung vui trong ngày trọng đại này.<br>
+            Sự hiện diện của quý vị sẽ làm cho ngày vui của chúng tôi<br>
+            càng thêm phần ý nghĩa và trọn vẹn!
+        </p>
+        <div class="invite__event-box">
+            <p class="invite__event-title">Lễ Thành Hôn</p>
+            <p class="invite__event-date">Chủ Nhật · 11 giờ 00<br>20 / 09 / 2026</p>
+            <p class="invite__event-lunar">(Tức Ngày 10 Tháng 08 Năm Bính Ngọ)</p>
+            <div class="invite__divider"><span></span><span class="deco-diamond-sm">✦</span><span></span></div>
+            <p class="invite__event-loc">Tổ 19, Khu phố Gia Tân</p>
+            <p class="invite__event-loc">Phường Gia Lộc, Tỉnh Tây Ninh</p>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ALBUM ẢNH
+════════════════════════════════════════ -->
+<section class="album" id="album">
+    <div class="section-label reveal-up">Album ảnh cưới</div>
+    <h2 class="section-title reveal-up">Khoảnh khắc đáng nhớ</h2>
+    <div class="album__grid">
+        
+        <!-- Ảnh 2 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5518.jpg" alt="Ảnh cưới 5518" loading="lazy">
+        </div>
+        
+        <!-- Ảnh 3 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5543.jpg" alt="Ảnh cưới 5543" loading="lazy">
+        </div>
+        
+        <!-- Ảnh 4 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5583.jpg" alt="Ảnh cưới 5583" loading="lazy">
+        </div>
+
+        <!-- Ảnh 5 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5595.jpg" alt="Ảnh cưới 5595" loading="lazy">
+        </div>
+
+        <!-- Ảnh 6 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5596.jpg" alt="Ảnh cưới 5596" loading="lazy">
+        </div>
+
+        <!-- Ảnh 8 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5621.jpg" alt="Ảnh cưới 5621" loading="lazy">
+        </div>
+
+        <!-- Ảnh 9 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5655.jpg" alt="Ảnh cưới 5655" loading="lazy">
+        </div>
+
+        <!-- Ảnh 10 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5716.jpg" alt="Ảnh cưới 5716" loading="lazy">
+        </div>
+
+        <!-- Ảnh 11 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5741.jpg" alt="Ảnh cưới 5741" loading="lazy">
+        </div>
+
+        <!-- Ảnh 12 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5750.jpg" alt="Ảnh cưới 5750" loading="lazy">
+        </div>
+
+        <!-- Ảnh 13 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5752.jpg" alt="Ảnh cưới 5752" loading="lazy">
+        </div>
+
+        <!-- Ảnh 15 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5767.jpg" alt="Ảnh cưới 5767" loading="lazy">
+        </div>
+
+        <!-- Ảnh 16 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5769.jpg" alt="Ảnh cưới 5769" loading="lazy">
+        </div>
+
+        <!-- Ảnh 17 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5772.jpg" alt="Ảnh cưới 5772" loading="lazy">
+        </div>
+
+        <!-- Ảnh 18 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5777.jpg" alt="Ảnh cưới 5777" loading="lazy">
+        </div>
+
+        <!-- Ảnh 19 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5785.jpg" alt="Ảnh cưới 5785" loading="lazy">
+        </div>
+
+        <!-- Ảnh 20 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5790.jpg" alt="Ảnh cưới 5790" loading="lazy">
+        </div>
+
+        <!-- Ảnh 22 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5811.jpg" alt="Ảnh cưới 5811" loading="lazy">
+        </div>
+
+        <!-- Ảnh 23 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5834.jpg" alt="Ảnh cưới 5834" loading="lazy">
+        </div>
+         <!-- Ảnh 7 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5610.jpg" alt="Ảnh cưới 5610" loading="lazy">
+        </div>
+        <!-- Ảnh 14 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5755.jpg" alt="Ảnh cưới 5755" loading="lazy">
+        </div>
+         <!-- Ảnh 21 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5810.jpg" alt="Ảnh cưới 5810" loading="lazy">
+        </div>
+
+        <!-- Ảnh 25 (Lớn) -->
+        <div class="album__item album__item--large reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5929.jpg" alt="Ảnh cưới 5929" loading="lazy">
+        </div>
+
+        <!-- Ảnh 26 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN5998.jpg" alt="Ảnh cưới 5998" loading="lazy">
+        </div>
+
+        <!-- Ảnh 27 -->
+        <div class="album__item reveal-scale">
+            <img src="./public/images/albums/0726 TUNG TRAN6012.jpg" alt="Ảnh cưới 6012" loading="lazy">
+        </div>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     BẢN ĐỒ
+════════════════════════════════════════ -->
+<section class="mapbox" id="map">
+    <div class="section-label reveal-up">Địa điểm</div>
+    <h2 class="section-title reveal-up">Bản đồ đường đi</h2>
+    <p class="mapbox__addr reveal-up">Tổ 19, Khu phố Gia Tân, Phường Gia Lộc, Tỉnh Tây Ninh</p>
+    <div class="mapbox__frame reveal-up">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.524419800996!2d106.34915377584832!3d11.074238553628277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310b31af940ddb69%3A0x22efee91222b75f0!2zxJDhuqFpIGzDvSBUaOG7qWMgxINuIENoYW4gbnXDtGkgVOG7lW5nIEhvw6BuZyDDgm4!5e0!3m2!1svi!2s!4v1781787792400!5m2!1svi!2s"
+            width="100%" height="380"
+            style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER / CẢM ƠN
+════════════════════════════════════════ -->
+<footer class="footer" id="footer">
+    <div class="footer__inner reveal-up">
+        <p class="footer__fancy font-fancy">Trân Trọng Cảm Ơn</p>
+        <div class="footer__divider"><span></span><span class="deco-diamond-sm">✦</span><span></span></div>
+        <h2 class="footer__names">Thanh Tùng &amp; Quế Trân</h2>
+        <p class="footer__msg">Rất hân hạnh được đón tiếp quý vị trong ngày trọng đại!</p>
+        <p class="footer__date">20 · 09 · 2026</p>
+        <p class="footer__copy">© 2026 · Website by Pham Thanh Tung</p>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
