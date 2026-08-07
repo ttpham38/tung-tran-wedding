@@ -63,7 +63,7 @@
 // ĐẾM NGƯỢC
 // ══════════════════════════════════════════
 (function initCountdown() {
-    const target = new Date('2026-09-20T11:00:00+07:00').getTime();
+    const target = new Date('2026-09-19T11:00:00+07:00').getTime();
 
     const els = {
         days:  document.getElementById('cd-days'),
