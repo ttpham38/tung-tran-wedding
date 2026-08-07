@@ -1,6 +1,6 @@
 # Website Thiệp Cưới — Thanh Tùng & Quế Trân
 
-Website thiệp mời cưới trực tuyến với giao diện thanh lịch, animation mượt mà và đầy đủ thông tin lễ cưới.
+Website thiệp mời cưới nhà gái trực tuyến với giao diện thanh lịch, animation mượt mà và đầy đủ thông tin lễ cưới.
 
 ## Triển khai
 
@@ -54,10 +54,10 @@ tran-tung-wedding/
 
 | Thông tin | Chi tiết |
 |-----------|----------|
-| Ngày | Chủ Nhật, 20/09/2026 |
-| Âm lịch | Ngày 10 Tháng 08 Năm Bính Ngọ |
+| Ngày | Chủ Nhật, 19/09/2026 |
+| Âm lịch | Ngày 09 Tháng 08 Năm Bính Ngọ |
 | Giờ | 11:00 |
-| Địa điểm | Tổ 19, Khu phố Gia Tân, Phường Gia Lộc, Tỉnh Tây Ninh |
+| Địa điểm |  408 Ngô Gia Tự , Phường Trung An, Tỉnh Đồng Tháp| 
 
 ## Tác giả
 
