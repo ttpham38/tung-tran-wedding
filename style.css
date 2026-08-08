@@ -741,6 +741,9 @@ a   { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════
    BẢN ĐỒ
 ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   BẢN ĐỒ
+══════════════════════════════════════════ */
 .mapbox {
     padding: 80px 24px;
     background: var(--bg-alt);
@@ -761,9 +764,14 @@ a   { text-decoration: none; color: inherit; }
     overflow: hidden;
     box-shadow: 0 8px 40px var(--shadow);
     border: 1px solid var(--border);
+    background: var(--bg-card); /* Đổ nền trắng/kem cho chắc chắn */
 }
 
-.mapbox__frame iframe { display: block; }
+.mapbox__frame iframe { 
+    display: block; 
+    width: 100% !important; /* Bắt buộc bản đồ phải trải dài 100% khung */
+    border: none; /* Xóa viền mặc định của iframe nếu có */
+}
 
 /* ══════════════════════════════════════════
    FOOTER
