@@ -704,10 +704,9 @@ a   { text-decoration: none; color: inherit; }
 }
 
 .album__grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: auto auto;
-    gap: 12px;
+    display: block; 
+    column-count: 2; /* Chia làm 2 cột */
+    column-gap: 12px; /* Khoảng cách giữa 2 cột ngang */
     max-width: 700px;
     margin: 0 auto;
 }
@@ -716,20 +715,25 @@ a   { text-decoration: none; color: inherit; }
     overflow: hidden;
     border-radius: var(--radius-sm);
     box-shadow: 0 4px 20px var(--shadow);
-    aspect-ratio: 3/4;
-    grid-column: span 6;
+    margin-bottom: 12px; /* Khoảng cách dọc giữa các ảnh */
+    break-inside: avoid; /* Tránh lỗi ảnh bị cắt đôi đẩy sang cột bên kia */
+    display: inline-block; /* Bắt buộc đi kèm break-inside để fix lỗi Safari */
+    width: 100%;
 }
 
 .album__item--large {
-    aspect-ratio: 4/3;
-    grid-column: span 12;
+    column-span: all; /* Ảnh lớn sẽ tự động tràn đủ 2 cột */
 }
 
 .album__item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; /* Giữ trọn vẹn tỷ lệ, không mất đầu */
+    display: block; 
     transition: transform 0.6s ease;
+}
+
+.album__item:hover img { 
+    transform: scale(1.04); 
 }
 
 .album__item:hover img { transform: scale(1.04); }
