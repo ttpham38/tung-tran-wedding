@@ -1,18 +1,21 @@
 /* ══════════════════════════════════════════
-   TOKENS & RESET
+   TOKENS & RESET (ĐÃ ĐỔI NỀN TRẮNG -> HỒNG CAM NHẠT)
 ══════════════════════════════════════════ */
 :root {
-    --bg:          #faf8f3;
-    --bg-alt:      #f5efe5;
-    --bg-card:     #ffffff;
-    --gold:        #c9a96e;
-    --gold-light:  #e8d5b0;
-    --gold-dark:   #9a7040;
-    --brown:       #3d2b1f;
-    --text:        #4a3728;
-    --text-muted:  #9b8777;
-    --border:      #e5d8c4;
-    --shadow:      rgba(61, 43, 31, 0.12);
+    --bg:          #fff2ef; /* Hồng cam rất nhạt cho nền chính thay vì màu trắng */
+    --bg-alt:      #ffe6e1; /* Hồng cam đậm hơn một chút cho các khu vực nền phụ */
+    --bg-card:     #ffffff; /* Giữ thiệp/card màu trắng tinh để làm nổi bật nội dung */
+    
+    /* Nhóm màu accent */
+    --gold:        #ff8c75; /* Hồng cam chính */
+    --gold-light:  #ffd3cb; /* Hồng cam nhạt */
+    --gold-dark:   #e06b53; /* Hồng cam đậm / Đất sét */
+    
+    --brown:       #593c38; /* Nâu đỏ trầm */
+    --text:        #6b514d; /* Màu chữ chính */
+    --text-muted:  #b39b97; /* Màu chữ phụ mờ */
+    --border:      #ffdfd9; /* Màu viền */
+    --shadow:      rgba(89, 60, 56, 0.12); /* Đổ bóng tone trầm */
 
     --ff-fancy:    "Alex Brush", cursive;
     --ff-serif:    "Cormorant Garamond", "Georgia", serif;
@@ -124,7 +127,7 @@ a   { text-decoration: none; color: inherit; }
     height: 46px;
     border-radius: 50%;
     border: 1.5px solid var(--gold);
-    background: rgba(250, 248, 243, 0.9);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(8px);
     cursor: pointer;
     display: flex;
@@ -139,14 +142,13 @@ a   { text-decoration: none; color: inherit; }
     box-shadow: 0 6px 24px var(--shadow);
 }
 
-/* Nút nhấp nháy khi đang chờ người dùng tương tác lần đầu */
 #musicBtn.waiting {
     animation: musicPulse 2s ease-in-out infinite;
 }
 
 @keyframes musicPulse {
     0%, 100% { box-shadow: 0 4px 16px var(--shadow); }
-    50%       { box-shadow: 0 0 0 8px rgba(201, 169, 110, 0.2), 0 4px 16px var(--shadow); }
+    50%       { box-shadow: 0 0 0 8px rgba(255, 140, 117, 0.2), 0 4px 16px var(--shadow); }
 }
 
 .music-icon {
@@ -213,11 +215,12 @@ a   { text-decoration: none; color: inherit; }
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    /* Làm gradient rực lên một xíu để không bị chìm vào màu nền mới */
     background:
-        radial-gradient(ellipse 80% 60% at 50% 0%,  #f5ece0 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 0%  100%, #fceee8 0%, transparent 50%),
-        radial-gradient(ellipse 60% 80% at 100% 100%,#f0ede5 0%, transparent 50%),
-        #faf8f3;
+        radial-gradient(ellipse 80% 60% at 50% 0%,  #ffe6e1 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 0%  100%, #ffd9d2 0%, transparent 50%),
+        radial-gradient(ellipse 60% 80% at 100% 100%,#ffe6e1 0%, transparent 50%),
+        var(--bg);
 }
 
 /* Hoa rơi */
@@ -761,15 +764,25 @@ a   { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
 .footer {
-    padding: 80px 24px 48px;
-    background: var(--brown);
+    padding: 0 24px 80px; /* Bỏ khoảng cách phía trên vì phần map đã có khoảng cách dưới */
+    background: var(--bg-alt); /* Trải màu hồng cam nhạt xuống để liền mạch với phần bản đồ */
     text-align: center;
 }
 
 .footer__inner {
-    max-width: 500px;
+    max-width: 700px; /* Giới hạn độ rộng bằng chính xác với độ rộng của bản đồ ở trên */
     margin: 0 auto;
+    background: #9e3b30; /* Chuyển màu đỏ đậm vào khối này */
+    padding: 60px 24px 48px; /* Tạo không gian bên trong khối đỏ */
+    border-radius: var(--radius); /* Bo góc đồng bộ với bản đồ */
+    box-shadow: 0 8px 40px var(--shadow); /* Đổ bóng nhẹ cho khối nổi lên */
 }
 
 .footer__fancy {
@@ -790,21 +803,21 @@ a   { text-decoration: none; color: inherit; }
     flex: 1;
     max-width: 80px;
     height: 1px;
-    background: rgba(201, 169, 110, 0.4);
+    background: rgba(255, 140, 117, 0.4);
 }
 
 .footer__names {
     font-family: var(--ff-serif);
     font-size: clamp(1.6rem, 5vw, 2.4rem);
     font-weight: 300;
-    color: #fff;
+    color: #ffffff;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
 }
 
 .footer__msg {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.7;
     margin-bottom: 0.5rem;
 }
@@ -820,50 +833,6 @@ a   { text-decoration: none; color: inherit; }
 .footer__copy {
     font-size: 0.68rem;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.4);
     text-transform: uppercase;
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width: 600px) {
-    .couple__grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-    }
-
-    .couple__heart {
-        font-size: 1.6rem;
-    }
-
-    .couple__img-wrap {
-        max-width: 220px;
-    }
-
-    .hero__date-block { gap: 10px; }
-
-    .hero__date-main {
-        font-size: clamp(3.5rem, 16vw, 5.5rem);
-    }
-
-    .countdown__grid { gap: 4px; }
-
-    .countdown__item { min-width: 56px; }
-
-    .album__grid { gap: 8px; }
-}
-
-@media (min-width: 601px) and (max-width: 900px) {
-    .couple__img-wrap { max-width: 200px; }
-}
-
-@media (min-width: 900px) {
-    body { max-width: 900px; margin: 0 auto; }
-
-    .hero { border-radius: 0 0 32px 32px; }
-
-    .album__grid {
-        grid-template-columns: repeat(12, 1fr);
-    }
 }
