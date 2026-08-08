@@ -2,30 +2,29 @@
    TOKENS & RESET (ĐÃ ĐỔI NỀN TRẮNG -> HỒNG CAM NHẠT)
 ══════════════════════════════════════════ */
 :root {
-    --bg:          #fff2ef; /* Hồng cam rất nhạt cho nền chính thay vì màu trắng */
-    --bg-alt:      #ffe6e1; /* Hồng cam đậm hơn một chút cho các khu vực nền phụ */
-    --bg-card:     #ffffff; /* Giữ thiệp/card màu trắng tinh để làm nổi bật nội dung */
+    --bg:          #fdfcf9; /* Trắng ngà sang trọng cho nền chính */
+    --bg-alt:      #f7f2e8; /* Trắng pha chút kem/vàng nhạt cho nền phụ */
+    --bg-card:     #ffffff; /* Trắng tinh cho thẻ thiệp */
     
-    /* Nhóm màu accent */
-    --gold:        #ff8c75; /* Hồng cam chính */
-    --gold-light:  #ffd3cb; /* Hồng cam nhạt */
-    --gold-dark:   #e06b53; /* Hồng cam đậm / Đất sét */
+    /* Nhóm màu Vàng Gold (Tông Đậm / Vàng Đồng Cổ) */
+    --gold:        #996f18; /* Vàng đồng cực đậm, sang trọng và cổ điển */
+    --gold-light:  #d9c49a; /* Vàng đồng nhạt (dùng cho các chi tiết chìm) */
+    --gold-dark:   #75530e; /* Nâu đồng sậm (dùng cho text nhấn) */
     
-    --brown:       #593c38; /* Nâu đỏ trầm */
-    --text:        #6b514d; /* Màu chữ chính */
-    --text-muted:  #b39b97; /* Màu chữ phụ mờ */
-    --border:      #ffdfd9; /* Màu viền */
-    --shadow:      rgba(89, 60, 56, 0.12); /* Đổ bóng tone trầm */
+    --brown:       #4a3f35; /* Nâu xám trầm tĩnh */
+    --text:        #5c4f45; /* Màu chữ chính */
+    --text-muted:  #998e85; /* Màu chữ phụ mờ */
+    --border:      #d6c6a7; /* Viền vàng sậm hơn một chút */
+    --shadow:      rgba(74, 63, 53, 0.12); /* Đổ bóng nhẹ nhàng */
 
-    --ff-fancy:    "Alex Brush", cursive;
-    --ff-serif:    "Cormorant Garamond", "Georgia", serif;
-    --ff-sans:     "Montserrat", sans-serif;
+    --ff-fancy:    "Great Vibes", cursive; /* Thay cho Alex Brush */
+    --ff-serif:    "Playfair Display", serif; /* Thay cho Cormorant Garamond */
+    --ff-sans:     "Montserrat", sans-serif; /* Giữ nguyên font chữ nhỏ cho dễ đọc */
 
     --radius:      16px;
     --radius-sm:   8px;
     --transition:  0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -212,17 +211,28 @@ a   { text-decoration: none; color: inherit; }
     position: relative;
     min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* Đổi từ center thành flex-end để đẩy cụm chữ xuống đáy */
     justify-content: center;
     overflow: hidden;
-    /* Làm gradient rực lên một xíu để không bị chìm vào màu nền mới */
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 0%,  #ffe6e1 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 0%  100%, #ffd9d2 0%, transparent 50%),
-        radial-gradient(ellipse 60% 80% at 100% 100%,#ffe6e1 0%, transparent 50%),
-        var(--bg);
+    
+    background: 
+        linear-gradient(rgba(253, 252, 249, 0.0), rgba(253, 252, 249, 0.3)), /* Tăng màng đen dưới đáy một chút xíu để chữ nổi bật trên bó hoa */
+        url("./public/images/albums/0726 TUNG TRAN5752.jpg") center top / cover no-repeat;
+}
+/* Tạo hiệu ứng quầng sáng trắng mạnh xung quanh chữ để chữ không bị chìm vào ảnh */
+.hero__names, 
+.hero__label, 
+.hero__date-main, 
+.hero__date-label, 
+.hero__date-val, 
+.hero__time {
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95), 0 0 30px rgba(255, 255, 255, 0.8);
 }
 
+/* Đảm bảo các đường line phân cách cũng hiển thị rõ */
+.deco-line {
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.8);
+}
 /* Hoa rơi */
 .hero__petals {
     position: absolute;
@@ -264,17 +274,22 @@ a   { text-decoration: none; color: inherit; }
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 60px 24px 80px;
+    /* Tăng thông số cuối cùng từ 0px lên 4vh (hoặc 40px) để đẩy toàn bộ cụm chữ lên cao */
+    padding: 60px 24px 4vh; 
     max-width: 560px;
     width: 100%;
 }
 
 .hero__label {
     font-family: var(--ff-fancy);
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    color: var(--gold-dark);
+    
+    /* Đã giảm kích thước chữ nhỏ lại (thu nhỏ cả trên điện thoại và máy tính) */
+    font-size: clamp(1.8rem, 5vw, 2.8rem); 
+    
+    color: #6e4b17; /* Màu vàng nâu đậm như bạn vừa yêu cầu */
     margin-bottom: 1rem;
     opacity: 0.9;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95), 0 0 30px rgba(255, 255, 255, 0.8);
 }
 
 .hero__divider {
@@ -287,18 +302,23 @@ a   { text-decoration: none; color: inherit; }
 .hero__names {
     font-family: var(--ff-serif);
     font-weight: 300;
-    font-size: clamp(2.2rem, 7vw, 4rem);
-    color: var(--brown);
+    font-size: clamp(3rem, 10vw, 5.5rem); 
+    
+    /* Đổi màu ở dòng này: Chuyển sang màu vàng gold đậm giống Save the Date */
+    color: var(--gold-dark); 
+    
     letter-spacing: 0.03em;
     line-height: 1.25;
     margin: 0.5rem 0;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95), 0 0 30px rgba(255, 255, 255, 0.8);
 }
 
 .hero__names em {
     display: block;
     font-family: var(--ff-fancy);
     font-style: normal;
-    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    /* Đã tăng từ (1.4rem -> 2.2rem) lên (2rem -> 3.5rem) */
+    font-size: clamp(2rem, 6vw, 3.5rem); 
     color: var(--gold);
     margin: 0.2em 0;
 }
@@ -348,7 +368,7 @@ a   { text-decoration: none; color: inherit; }
     font-weight: 400;
     letter-spacing: 0.08em;
     color: var(--text-muted);
-    margin-bottom: 2rem;
+    margin-bottom: 15px; /* Giảm từ 2rem xuống 15px để chữ hạ thấp xuống đáy */
     line-height: 1.7;
 }
 
@@ -373,7 +393,7 @@ a   { text-decoration: none; color: inherit; }
 
 .hero__scroll-hint {
     position: absolute;
-    bottom: 28px;
+    bottom: 10px; /* Hạ thấp biểu tượng cuộn chuột */
     left: 50%;
     transform: translateX(-50%);
     width: 26px;
@@ -496,9 +516,15 @@ a   { text-decoration: none; color: inherit; }
     width: 100%;
     max-width: 260px;
     aspect-ratio: 3/4;
-    border-radius: var(--radius);
+    
+    /* Tăng độ bo cong cực đại để khung ảnh mềm mại hẳn (Dáng Oval) */
+    border-radius: 130px; 
+    
     overflow: hidden;
-    border: 3px solid var(--gold-light);
+    
+    /* Làm đường viền mảnh lại thành 2px và giữ màu vàng gold sáng */
+    border: 2px solid var(--gold-light); 
+    
     box-shadow: 0 12px 40px var(--shadow);
     transition: transform 0.4s ease;
 }
@@ -724,6 +750,25 @@ a   { text-decoration: none; color: inherit; }
 .album__item--large {
     column-span: all; /* Ảnh lớn sẽ tự động tràn đủ 2 cột */
 }
+/* Ép ảnh Album hiển thị full chiều ngang bằng với khung thiệp mời */
+.album__item--full {
+    grid-column: 1 / -1; /* Lệnh này bắt buộc ảnh phải trải dài vượt qua tất cả các cột */
+    width: 100%;
+    
+    /* Thông số 600px là kích thước tiêu chuẩn của khung thiệp. 
+       Nếu thấy ảnh vẫn nhỏ hơn thiệp, bạn tăng lên 680px hoặc 700px. 
+       Nếu to hơn, bạn giảm xuống 560px nhé! */
+    max-width: 600px; 
+    
+    margin: 0 auto; /* Căn giữa bức ảnh */
+}
+
+/* (Tùy chọn) Đảm bảo hình ảnh bên trong không bị méo */
+.album__item--full img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 .album__item img {
     width: 100%;
@@ -789,12 +834,12 @@ a   { text-decoration: none; color: inherit; }
 }
 
 .footer__inner {
-    max-width: 700px; /* Giới hạn độ rộng bằng chính xác với độ rộng của bản đồ ở trên */
+    max-width: 700px; 
     margin: 0 auto;
-    background: #9e3b30; /* Chuyển màu đỏ đậm vào khối này */
-    padding: 60px 24px 48px; /* Tạo không gian bên trong khối đỏ */
-    border-radius: var(--radius); /* Bo góc đồng bộ với bản đồ */
-    box-shadow: 0 8px 40px var(--shadow); /* Đổ bóng nhẹ cho khối nổi lên */
+    background: var(--brown); /* Đổi màu khối thẻ thành Nâu Trầm sang trọng */
+    padding: 60px 24px 48px; 
+    border-radius: var(--radius); 
+    box-shadow: 0 8px 40px var(--shadow); 
 }
 
 .footer__fancy {
